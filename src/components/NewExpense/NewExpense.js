@@ -2,10 +2,19 @@ import React from 'react';
 import './NewExpense.css';
 import ExpenseForm from './ExpenseForm';
 
-const NewExpense = () => {
+const NewExpense = (props) => {
+  const getData=(data)=>{
+   const recievedGetData={
+    ...data,
+    id:Math.random().toString()
+   }
+   console.log(recievedGetData);
+   props.getFormData(recievedGetData);
+  }
+  
   return (
     <div className='new-expense'>
-    <ExpenseForm/>
+    <ExpenseForm onCollectData={getData}/>
     </div>
   )
 }
