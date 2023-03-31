@@ -1,8 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './NewExpense.css';
 import ExpenseForm from './ExpenseForm';
 
 const NewExpense = (props) => {
+const [shown,setShown]=useState(false); 
+  
+
   const getData=(data)=>{
    const recievedGetData={
     ...data,
@@ -11,10 +14,20 @@ const NewExpense = (props) => {
    console.log(recievedGetData);
    props.getFormData(recievedGetData);
   }
+ 
+  const showForm=()=>{
+  setShown(true);
+  }
+ 
+  const ChangeMode=()=>{
+  setShown(false);  
+  }
+  
   
   return (
     <div className='new-expense'>
-    <ExpenseForm onCollectData={getData}/>
+     {!shown &&<button onClick={showForm}>Add Expense</button>}
+     {shown &&<ExpenseForm onCollectData={getData} OnCancel={ChangeMode} />}
     </div>
   )
 }
